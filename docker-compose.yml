@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Redis database
+  redis:
+    image: redis:7-alpine
+    container_name: java-for-enterprise-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - app-network
+
+  # Redis Insight (GUI management tool) - Optional
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis-insight
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - redis_insight_data:/db
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+  redis_insight_data:
+
+networks:
+  app-network:
+    driver: bridge
