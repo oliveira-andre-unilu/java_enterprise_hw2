@@ -19,7 +19,7 @@ public class Tweet implements Serializable{
     private String id;
     private String title, message;
     private String authorName, authorId; //Author related data allowing for quick lookup and id relationship
-    private Date postDate;
+    private String postDate;
     private List<Feedback> allFeedbacks;
 
 
@@ -32,12 +32,12 @@ public class Tweet implements Serializable{
         this.message = "UNKNOWN";
         this.authorName = "UNKNOWN";
         this.authorId = "0";
-        this.postDate = new Date();
+        this.postDate = "2000-00-00";
         this.allFeedbacks = new ArrayList<Feedback>();
     }
 
     
-    public Tweet(String id, String title, String message, String authorName, String authorId, Date postDate,
+    public Tweet(String id, String title, String message, String authorName, String authorId, String postDate,
             List<Feedback> allFeedbacks) {
         this.id = id;
         this.title = title;

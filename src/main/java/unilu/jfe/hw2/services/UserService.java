@@ -26,7 +26,7 @@ public class UserService {
     public boolean createUser(String userName, String email){
         
         //Verify if userName or email already exists
-        for(String id: rt.keys("[0-9]*")){
+        for(String id: rt.keys("[A-Z]*[0-9]*")){
             User existingUser = rt.opsForValue().get(id);
             if(existingUser.getEmail().equals(email) || existingUser.getUserName().equals(userName)){
                 return false;
@@ -48,7 +48,7 @@ public class UserService {
 
     public List<User> getAllUsers(){
         List<User> allUsers = new ArrayList<>();
-        for(String id: rt.keys("[0-9]*")){
+        for(String id: rt.keys("[A-Z]*[0-9]*")){
             User existingUser = rt.opsForValue().get(id);
             allUsers.add(existingUser);
         }
@@ -57,7 +57,7 @@ public class UserService {
 
     //Helper functions
     private String generateId(){
-        return String.valueOf(rt.opsForValue().increment(USER_ID_SEQUENCE));
+        return "USER" + String.valueOf(rt.opsForValue().increment(USER_ID_SEQUENCE));
     }
 
 }

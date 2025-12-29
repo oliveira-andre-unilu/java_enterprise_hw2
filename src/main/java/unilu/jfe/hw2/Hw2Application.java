@@ -7,17 +7,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import unilu.jfe.hw2.entities.Tweet;
 import unilu.jfe.hw2.entities.User;
+import unilu.jfe.hw2.services.TweetService;
 import unilu.jfe.hw2.services.UserService;
 
 @SpringBootApplication
 public class Hw2Application implements CommandLineRunner{
 
 	private final RedisTemplate<String, User> rt;
+	private final RedisTemplate<String, Tweet> tweetRt;
 
 
-	public Hw2Application(RedisTemplate<String, User> rt){
+	public Hw2Application(RedisTemplate<String, User> rt, RedisTemplate<String, Tweet> tweetRt){
 		this.rt = rt;
+		this.tweetRt = tweetRt;
 	}
 
 	public static void main(String[] args) {
@@ -28,6 +32,7 @@ public class Hw2Application implements CommandLineRunner{
 	public void run(String... args) throws Exception{
 
 		UserService us = new UserService(this.rt);
+		TweetService ts = new TweetService(tweetRt, us);
 
 		System.out.println("Adding users....");
 		us.createUser("Test1", "Test1@email.com");
@@ -44,6 +49,14 @@ public class Hw2Application implements CommandLineRunner{
 		String id = allUsers.get(0).getId();
 		User foundUser = us.getUser(id);
 		System.out.println(foundUser);
+
+
+		System.out.println("Adding Tweets...");
+		Tweet result = ts.postTweet("USER1", "First tweet", "Posting tweets is awesome");
+		System.out.println(result);
+
+		//TODO: Continue to test Tweet connection
+
 	}
 
 }
