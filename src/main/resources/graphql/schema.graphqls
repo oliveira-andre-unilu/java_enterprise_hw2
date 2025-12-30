@@ -1,0 +1,65 @@
+# General Data types
+type User {
+    id: String!
+    userName: String!
+    email: String!
+}
+
+type Tweet {
+    id: String!
+    authorName: String!
+    authorId: String!
+    title: String!
+    message: String!
+    postDate: String!
+    allFeedbacks: [Feedback!]
+}
+
+type Feedback {
+    id: String!
+    userName: String!
+    userId: String!
+    content: String!
+}
+
+# Input types
+
+input CreateUserInput {
+    userName: String!
+    email: String!
+}
+
+input PostTweetInput {
+    userId: String!
+    title: String!
+    message: String!
+}
+
+input PostFeedbackInput {
+    postId: String!
+    userId: String!
+    content: String!
+}
+
+# All queries
+
+type Query {
+    # User queries
+    user(id: String!): User
+    users: [User!]!
+
+    # Tweet queries
+    searchFor(word: String!): [Tweet!]!
+    tweet(id: String!): Tweet
+}
+
+# All Mutations
+
+type Mutation {
+    # User mutations
+    createUser(input: CreateUserInput!): User
+    
+    # Tweet related mutations
+    postTweet(input: PostTweetInput!): Tweet
+    postFeedback(input: PostFeedbackInput): Feedback
+}

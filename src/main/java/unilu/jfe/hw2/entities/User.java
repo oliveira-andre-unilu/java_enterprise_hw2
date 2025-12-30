@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import org.springframework.data.redis.core.RedisHash;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @RedisHash("User")
-@Getter
-@Setter
+@Data
 public class User implements Serializable{
     
     //General data attributes

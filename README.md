@@ -1,5 +1,5 @@
 # Main milestones to achieve
 
-- TEST current connection with redis
+- [x] TEST current connection with redis
 
-- GraphQL integration
+- [x] GraphQL integration

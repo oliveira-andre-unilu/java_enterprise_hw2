@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import unilu.jfe.hw2.entities.Feedback;
 import unilu.jfe.hw2.entities.Tweet;
 import unilu.jfe.hw2.entities.User;
 
+@Service
 public class TweetService {
 
     //Constants
@@ -22,6 +25,7 @@ public class TweetService {
     private final UserService us;
 
     //Constructors
+    @Autowired
     public TweetService(RedisTemplate<String, Tweet> rt, UserService us) {
         this.rt = rt;
         this.us = us;

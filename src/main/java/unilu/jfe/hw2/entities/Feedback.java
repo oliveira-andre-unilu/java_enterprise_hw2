@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import org.springframework.data.redis.core.RedisHash;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @RedisHash("FeedBack")
-@Getter
-@Setter
+@Data
 public class Feedback implements Serializable{
 
     //Data related attributes
@@ -30,5 +28,12 @@ public class Feedback implements Serializable{
         this.userName = userName;
         this.userId = userId;
         this.content = content;
+    }
+
+    //Override methods
+
+    @Override
+    public String toString() {
+        return "Feedback [id=" + id + ", userName=" + userName + ", userId=" + userId + ", content=" + content + "]";
     }
 }

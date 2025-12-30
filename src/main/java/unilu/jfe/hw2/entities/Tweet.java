@@ -2,17 +2,15 @@ package unilu.jfe.hw2.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.redis.core.RedisHash;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 @RedisHash("Tweet")
-@Getter
-@Setter
+@Data
 public class Tweet implements Serializable{
     
     //Data related attributes
@@ -46,6 +44,14 @@ public class Tweet implements Serializable{
         this.authorId = authorId;
         this.postDate = postDate;
         this.allFeedbacks = allFeedbacks;
+    }
+
+    //Override methods
+
+    @Override
+    public String toString() {
+        return "Tweet [id=" + id + ", title=" + title + ", message=" + message + ", authorName=" + authorName
+                + ", authorId=" + authorId + ", postDate=" + postDate + ", allFeedbacks=" + allFeedbacks + "]";
     }
 
 }

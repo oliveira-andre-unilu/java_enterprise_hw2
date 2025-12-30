@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import unilu.jfe.hw2.entities.User;
 
+@Service
 public class UserService {
     
     //Constants
@@ -17,19 +20,20 @@ public class UserService {
 
 
     //Constructors
+    @Autowired
     public UserService(RedisTemplate<String, User> rt){
         this.rt = rt;
     }
 
 
     //Main functions
-    public boolean createUser(String userName, String email){
+    public User createUser(String userName, String email){
         
         //Verify if userName or email already exists
-        for(String id: rt.keys("[A-Z]*[0-9]*")){
+        for(String id: rt.keys("USER[0-9]*")){
             User existingUser = rt.opsForValue().get(id);
             if(existingUser.getEmail().equals(email) || existingUser.getUserName().equals(userName)){
-                return false;
+                return null;
             }
         }
 
@@ -38,7 +42,7 @@ public class UserService {
         User newUser = new User(newId, userName, email);
         rt.opsForValue().set(newId, newUser);
         System.out.println("Adding User " + newUser + "...");
-        return true;
+        return newUser;
     }
 
     public User getUser(String id){
@@ -48,7 +52,7 @@ public class UserService {
 
     public List<User> getAllUsers(){
         List<User> allUsers = new ArrayList<>();
-        for(String id: rt.keys("[A-Z]*[0-9]*")){
+        for(String id: rt.keys("USER[0-9]*")){
             User existingUser = rt.opsForValue().get(id);
             allUsers.add(existingUser);
         }
