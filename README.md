@@ -10,7 +10,7 @@
 
 - [x] Rewrite the new README.md file
 
-- [ ] Screencast
+- [x] Screencast
 
 ---
 
@@ -21,8 +21,8 @@
 
 **External links:**
 
-- Screencast: [Youtube](https://somelink)
-- Repository: [GitHub](https://somelink)
+- Screencast: [Youtube](https://youtu.be/jIhhmBY3Jyg)
+- Repository: [GitHub](https://github.com/oliveira-andre-unilu/java_enterprise_hw2)
 
 ## Project Design and flaws
 
