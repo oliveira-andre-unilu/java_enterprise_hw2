@@ -6,31 +6,37 @@ import org.springframework.data.redis.core.RedisHash;
 
 import lombok.Data;
 
+/**
+ * Entity class defining a feedback element that will be stored inside a Tweet
+ * 
+ * @author Andre Martins
+ */
 @RedisHash("FeedBack")
 @Data
-public class Feedback implements Serializable{
+public class Feedback implements Serializable {
 
-    //Data related attributes
+    // Data related attributes
     private String id;
     private String userName, userId;
     private String content;
 
-    //Constructors
-    public Feedback(){
+    // Constructors
+
+    public Feedback() {
         this.id = "0";
         this.userName = "UNKNOWN";
         this.userId = "0";
         this.content = "NOTHING";
     }
 
-    public Feedback(String id, String userName, String userId, String content){
+    public Feedback(String id, String userName, String userId, String content) {
         this.id = id;
         this.userName = userName;
         this.userId = userId;
         this.content = content;
     }
 
-    //Override methods
+    // Override methods
 
     @Override
     public String toString() {

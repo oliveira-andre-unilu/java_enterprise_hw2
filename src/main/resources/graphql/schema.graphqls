@@ -12,6 +12,7 @@ type Tweet {
     title: String!
     message: String!
     postDate: String!
+    validityLength: Int!
     allFeedbacks: [Feedback!]
 }
 
@@ -32,6 +33,7 @@ input CreateUserInput {
 input PostTweetInput {
     userId: String!
     title: String!
+    validityLength: Int!
     message: String!
 }
 

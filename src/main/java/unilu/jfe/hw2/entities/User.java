@@ -6,16 +6,22 @@ import org.springframework.data.redis.core.RedisHash;
 
 import lombok.Data;
 
+/**
+ * Entity class representing a User that will be referenced in both Feedback and Tweet classes.
+ * 
+ * @author Andre Martins
+ */
 @RedisHash("User")
 @Data
-public class User implements Serializable{
-    
-    //General data attributes
+public class User implements Serializable {
+
+    // General data attributes
     private String id;
     private String userName, email;
 
-    //Constructors
-    public User(){
+    // Constructors
+
+    public User() {
         this.id = "0";
         this.userName = "UNKNOWN";
         this.email = "not@known.com";
@@ -27,9 +33,10 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    //Override methods
+    // Override methods
+
     @Override
-    public String toString(){
+    public String toString() {
         return "User =>{id: " + this.getId() + "; username: " + this.userName + "; email: " + this.getEmail() + "}";
     }
 }

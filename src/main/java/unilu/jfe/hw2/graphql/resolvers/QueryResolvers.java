@@ -11,38 +11,43 @@ import unilu.jfe.hw2.entities.User;
 import unilu.jfe.hw2.services.TweetService;
 import unilu.jfe.hw2.services.UserService;
 
+/**
+ * Class responsible for implementing all queries that will be used in GraphQL.
+ * 
+ * @author Andre Martins
+ */
 @Controller
 public class QueryResolvers {
-    
-    //Dependencies
+
+    // Dependencies
     private UserService us;
     private TweetService ts;
 
-    //Constructors
-    public QueryResolvers(UserService us, TweetService ts){
+    // Constructors
+    public QueryResolvers(UserService us, TweetService ts) {
         this.us = us;
         this.ts = ts;
     }
 
-    //User queries
+    // User queries
     @QueryMapping
-    public User user(@Argument String id){
+    public User user(@Argument String id) {
         return us.getUser(id);
     }
 
     @QueryMapping
-    public List<User> users(){
+    public List<User> users() {
         return us.getAllUsers();
     }
 
-    //Tweet queries
+    // Tweet queries
     @QueryMapping
-    public List<Tweet> searchFor(@Argument String word){
+    public List<Tweet> searchFor(@Argument String word) {
         return ts.searchFor(word);
     }
 
     @QueryMapping
-    public Tweet tweet(@Argument String id){
+    public Tweet tweet(@Argument String id) {
         return ts.getPost(id);
     }
 }

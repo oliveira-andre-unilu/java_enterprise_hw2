@@ -14,27 +14,24 @@ import unilu.jfe.hw2.entities.User;
 import unilu.jfe.hw2.services.TweetService;
 import unilu.jfe.hw2.services.UserService;
 
+/**
+ * Main Spring application class. Responsible for starting the main server as
+ * well as to initialize the data.
+ * 
+ * @author Andre Martins
+ */
 @SpringBootApplication
-public class Hw2Application{
+public class Hw2Application {
 
-	private final RedisTemplate<String, User> rt;
-	private final RedisTemplate<String, Tweet> tweetRt;
+    public static void main(String[] args) {
+        SpringApplication.run(Hw2Application.class, args);
+    }
 
-
-	public Hw2Application(RedisTemplate<String, User> rt, RedisTemplate<String, Tweet> tweetRt){
-		this.rt = rt;
-		this.tweetRt = tweetRt;
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(Hw2Application.class, args);
-	}
-
-	@Bean
+    @Bean
     public CommandLineRunner demo(UserService userService, TweetService tweetService) {
         return args -> {
             System.out.println("=== Initializing Test Data ===");
-            
+
             System.out.println("Adding users....");
             User user1 = userService.createUser("Test1", "Test1@email.com");
             User user2 = userService.createUser("Test2", "Test2@email.com");
@@ -48,19 +45,20 @@ public class Hw2Application{
             System.out.println(foundUser);
 
             System.out.println("Adding Tweets...");
-            Tweet tweet1 = tweetService.postTweet(user1.getId(), "First tweet", "Posting tweets is awesome");
+            Tweet tweet1 = tweetService.postTweet(user1.getId(), "First tweet", "Posting tweets is awesome", 30);
             System.out.println(tweet1);
 
-            Tweet tweet2 = tweetService.postTweet(user2.getId(), "Second tweet", "Creating some new posts with other opinion");
+            Tweet tweet2 = tweetService.postTweet(user2.getId(), "Second tweet",
+                    "Creating some new posts with other opinion", 30);
             System.out.println(tweet2);
 
             System.out.println("Adding feedback....");
             Feedback f1 = tweetService.postFeedback(tweet1.getId(), user3.getId(), "I really like your opinion");
             System.out.println(f1);
-            
+
             Tweet updatedTweet = tweetService.getPost(tweet1.getId());
             System.out.println(updatedTweet);
-            
+
             System.out.println("=== Test Data Initialization Complete ===");
             System.out.println("GraphQL available at: http://localhost:8080/graphql");
             System.out.println("GraphiQL UI available at: http://localhost:8080/graphiql");

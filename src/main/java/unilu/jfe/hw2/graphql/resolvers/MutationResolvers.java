@@ -13,32 +13,37 @@ import unilu.jfe.hw2.graphql.types.PostTweetInput;
 import unilu.jfe.hw2.services.TweetService;
 import unilu.jfe.hw2.services.UserService;
 
+/**
+ * Class responsible for implementing all mutations that will be linked to GraphQL
+ * 
+ * @author Andre Martins
+ */
 @Controller
 public class MutationResolvers {
-    //Dependencies
+    // Dependencies
     private UserService us;
     private TweetService ts;
 
-    //Constructors
-    public MutationResolvers(UserService us, TweetService ts){
+    // Constructors
+    public MutationResolvers(UserService us, TweetService ts) {
         this.us = us;
         this.ts = ts;
     }
 
-    //User mutations
+    // User mutations
     @MutationMapping
-    public User createUser(@Argument CreateUserInput input){
-        return us.createUser(input.getUsername(), input.getEmail());
+    public User createUser(@Argument CreateUserInput input) {
+        return us.createUser(input.getUserName(), input.getEmail());
     }
 
-    //Tweet mutation
+    // Tweet mutation
     @MutationMapping
-    public Tweet postTweet(@Argument PostTweetInput input){
-        return ts.postTweet(input.getUserId(), input.getTitle(), input.getMessage());
+    public Tweet postTweet(@Argument PostTweetInput input) {
+        return ts.postTweet(input.getUserId(), input.getTitle(), input.getMessage(), input.getValidityLength());
     }
 
     @MutationMapping
-    public Feedback postFeedback(@Argument PostFeedbackInput input){
+    public Feedback postFeedback(@Argument PostFeedbackInput input) {
         return ts.postFeedback(input.getPostId(), input.getUserId(), input.getContent());
     }
 }
