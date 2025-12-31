@@ -15,7 +15,7 @@ services:
     networks:
       - app-network
 
-  # Redis Insight (GUI management tool) - Optional
+  # Redis Insight (GUI management tool)
   redis-insight:
     image: redislabs/redisinsight:latest
     container_name: redis-insight
