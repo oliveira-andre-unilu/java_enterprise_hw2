@@ -1,19 +1,3 @@
-# Main milestones to achieve
-
-- [x] TEST current connection with redis
-
-- [x] GraphQL integration
-
-## Last Run-down
-
-- [x] Clean all the code
-
-- [x] Rewrite the new README.md file
-
-- [x] Screencast
-
----
-
 # Java for enterprise applications: Assignment 2
 
 *Author:* André Martins  
